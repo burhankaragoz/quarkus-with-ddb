@@ -1,0 +1,250 @@
+{
+  "ModelName": "PetClinic",
+  "ModelMetadata": {
+    "Author": "burhan",
+    "DateCreated": "Sep 12, 2023, 08:09 PM",
+    "DateLastModified": "Sep 12, 2023, 08:21 PM",
+    "Description": "an attempt to migrate pet-clinic project to quarkus and dynamo db",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "3.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "Pets",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "name",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "type",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "birth_date",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "owner",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "owner",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "owner",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "name": {
+            "S": "Leo"
+          },
+          "type": {
+            "S": "cat"
+          },
+          "birth_date": {
+            "S": "2000-09-07"
+          },
+          "owner": {
+            "S": "George Franklin"
+          }
+        },
+        {
+          "name": {
+            "S": "Basil"
+          },
+          "type": {
+            "S": "hamster"
+          },
+          "birth_date": {
+            "S": "2002-08-06"
+          },
+          "owner": {
+            "S": "Betty Davis"
+          }
+        },
+        {
+          "name": {
+            "S": "Rosy"
+          },
+          "type": {
+            "S": "dog"
+          },
+          "birth_date": {
+            "S": "2001-04-17"
+          },
+          "owner": {
+            "S": "Eduardo Rodriquez"
+          }
+        },
+        {
+          "name": {
+            "S": "Jewel"
+          },
+          "type": {
+            "S": "dog"
+          },
+          "birth_date": {
+            "S": "2000-03-07"
+          },
+          "owner": {
+            "S": "Eduardo Rodriquez"
+          }
+        },
+        {
+          "name": {
+            "S": "George"
+          },
+          "type": {
+            "S": "snake"
+          },
+          "birth_date": {
+            "S": "2000-01-20"
+          },
+          "owner": {
+            "S": "Peter McTavish"
+          }
+        },
+        {
+          "name": {
+            "S": "Samantha"
+          },
+          "type": {
+            "S": "cat"
+          },
+          "birth_date": {
+            "S": "1995-09-04"
+          },
+          "owner": {
+            "S": "Jean Coleman"
+          }
+        },
+        {
+          "name": {
+            "S": "Max"
+          },
+          "type": {
+            "S": "cat"
+          },
+          "birth_date": {
+            "S": "1995-09-04"
+          },
+          "owner": {
+            "S": "Jean Coleman"
+          }
+        },
+        {
+          "name": {
+            "S": "Lucky"
+          },
+          "type": {
+            "S": "bird"
+          },
+          "birth_date": {
+            "S": "1999-08-06"
+          },
+          "owner": {
+            "S": "Jeff Black"
+          }
+        },
+        {
+          "name": {
+            "S": "Mulligan"
+          },
+          "type": {
+            "S": "dog"
+          },
+          "birth_date": {
+            "S": "1997-02-24"
+          },
+          "owner": {
+            "S": "Maria Escobito"
+          }
+        },
+        {
+          "name": {
+            "S": "Freddy"
+          },
+          "type": {
+            "S": "bird"
+          },
+          "birth_date": {
+            "S": "2000-03-09"
+          },
+          "owner": {
+            "S": "David Schroeder"
+          }
+        },
+        {
+          "name": {
+            "S": "Lucky"
+          },
+          "type": {
+            "S": "dog"
+          },
+          "birth_date": {
+            "S": "2000-06-24"
+          },
+          "owner": {
+            "S": "Carlos Estaban"
+          }
+        },
+        {
+          "name": {
+            "S": "Sly"
+          },
+          "type": {
+            "S": "cat"
+          },
+          "birth_date": {
+            "S": "2002-06-08"
+          },
+          "owner": {
+            "S": "Carlos Estaban"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      },
+      "BillingMode": "PROVISIONED",
+      "ProvisionedCapacitySettings": {
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        },
+        "AutoScalingRead": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        },
+        "AutoScalingWrite": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        }
+      }
+    }
+  ]
+}
